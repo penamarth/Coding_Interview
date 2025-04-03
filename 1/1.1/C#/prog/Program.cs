@@ -1,5 +1,5 @@
 ﻿bool isCharsOccurOnce(string str){
-    foreach( char c in str){
+    foreach(char c in str){
         if (str.Count(x => x == c) > 1)
         {
             return false;
