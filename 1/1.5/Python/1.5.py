@@ -12,7 +12,7 @@ def areOneStepAway(s1: str, s2: str) -> bool:
             return False
     elif len(s1) - len(s2) == 1 and all(x in s1 for x in s2):
         return True
-    elif len(s2) - len(s1) == 1 and all(x in s2 for x in s1):
+    elif len(s2) - len(s1) == 1 and all(x in s2 for x in s1 ):
         return True
     else:
         return False
