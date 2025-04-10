@@ -78,6 +78,20 @@ int main()
     printPic(picture, G);
     std::cout << std::endl;
 
+    rotateRight(picture);
+
+    printPic(picture, R);
+    std::cout << std::endl;
+    printPic(picture, G);
+    std::cout << std::endl;
+
+    rotateRight(picture);
+
+    printPic(picture, R);
+    std::cout << std::endl;
+    printPic(picture, G);
+    std::cout << std::endl;
+
     picture = {
         {{' ','O',' ',' '},{'*','*',' ',' '},{' ','O',' ',' '},{' ','O',' ',' '}},
         {{' ','O',' ',' '},{' ','O','*',' '},{' ','O',' ',' '},{' ','O',' ',' '}},
