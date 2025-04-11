@@ -1,33 +1,65 @@
 ﻿#include <iostream>
 #include <vector>
-#include <tuple>
-
-void removeRow(std::vector<std::vector<int>>& matrix,int col) {
-    matrix.erase(matrix.begin() + col);
-}
-
-void removeCol(std::vector<std::vector<int>>& matrix, int row) {
-    for (int i = 0; i < matrix.size(); i++)
-    {
-        matrix[i].erase(matrix[i].begin() + row);
-    }
-}
+#include <set>
 
 void removeNills(std::vector<std::vector<int>> &matrix)
 {
-    std::vector<std::tuple<int,int>> toDelete;
+    std::set<int> rowsToDelete;
+    std::set<int> colsToDelete;
     for (int i = 0; i < matrix.size(); i++)
     {
         for (int j = 0; j < matrix[0].size(); j++) {
             if (matrix[i][j] == 0) {
-                removeRow(matrix, i);
-                removeCol(matrix, j);
+                rowsToDelete.insert(i);
+                colsToDelete.insert(j);
             }
         }
     }
+    while (!rowsToDelete.empty())
+    {
+        int x = *rowsToDelete.begin();
+
+        matrix.erase(matrix.begin() + x);
+
+        rowsToDelete.erase(x);
+
+        std::set<int> newRowsToDelete;
+        for (int row : rowsToDelete)
+        {
+            if (row > x)
+                newRowsToDelete.insert(row - 1);
+            else
+                newRowsToDelete.insert(row);
+        }
+        rowsToDelete = newRowsToDelete;
+
+    }
+
+    while (!colsToDelete.empty())
+    {
+        int y = *colsToDelete.begin();
+
+        for (int i = 0; i < matrix.size(); i++) {
+            matrix[i].erase(matrix[i].begin() + y);
+        }
+
+        colsToDelete.erase(y);
+
+        std::set<int> newColsToDelete;
+
+        for (int col : colsToDelete)
+        {
+            if (col > y)
+                newColsToDelete.insert(col - 1);
+            else
+                newColsToDelete.insert(col);
+        }
+        colsToDelete = newColsToDelete;
+    }
+           
 }
 
-void printMatrix(std::vector<std::vector<int>>& matrix)
+void printMatrix(const std::vector<std::vector<int>>& matrix)
 {
     for (int i = 0; i < matrix.size(); i++)
     {
